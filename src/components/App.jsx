@@ -1,16 +1,23 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
-};
+import { Component } from 'react';
+import { GlobalStyle } from './GlobalStyle';
+import { Searchbar } from './Searchbar/Searchbar';
+import { Layout } from './Layout/Layout';
+
+export class App extends Component {
+  
+  state = {
+    title: [],
+    isLoading: false,
+    error: false,
+  };
+
+  render() {
+    return(
+    
+      <Layout>
+        <Searchbar onSubmit={(console.log) } />
+        <GlobalStyle />
+      </Layout>
+    );
+  }
+}
