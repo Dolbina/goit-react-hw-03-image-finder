@@ -1,4 +1,5 @@
-import { Form, Formik, Field } from "formik";
+import { Formik } from "formik";
+import { Form, Field, BtnWrap, LabelBtn } from './Searchbar.styled';
 
 export const Searchbar = ({ onSubmit }) => {
     const handelSubmit = (values, actions) => {
@@ -8,7 +9,8 @@ export const Searchbar = ({ onSubmit }) => {
     return (
       <Formik initialValues={{ title: '' }} onSubmit={handelSubmit}>
         <Form autoComplete="off">
-          <button type="submit">Search</button>
+          <BtnWrap type="submit"></BtnWrap>
+          <LabelBtn>Search</LabelBtn>
           <label>
             <Field
               name="title"
