@@ -66,7 +66,10 @@ export class App extends Component {
 
 
   componentDidUpdate(prevProps, prevState) {
-   console.log("update");
+    console.log("update");
+    console.log(this.state.request);
+console.log(prevState.request, '  ', this.state.request);
+console.log(prevState.page, '  ', this.state.page);    
     if (
       this.state.request !== '' &&
       (prevState.request !== this.state.request ||
