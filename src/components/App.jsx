@@ -66,13 +66,15 @@ export class App extends Component {
 
 
   componentDidUpdate(prevProps, prevState) {
-   
-      if (
-        this.state.request !== '' &&
-        (prevState.request !== this.state.request ||
-          prevState.page !== this.state.page)
-      )
-        this.fetchImg();
+   console.log("update");
+    if (
+      this.state.request !== '' &&
+      (prevState.request !== this.state.request ||
+        prevState.page !== this.state.page)
+    ) {
+      console.log("запрос");
+      this.fetchImg();
+    }
      window.scrollTo(0, document.body.scrollHeight);
 }
 
