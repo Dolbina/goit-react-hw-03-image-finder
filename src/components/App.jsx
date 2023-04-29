@@ -50,13 +50,9 @@ export class App extends Component {
 
   onLoadMore = () => {
     this.setState(state => ({
-      page: (state.page += 1),
+      page: state.page + 1,
     }));
-     if (
-       this.state.request !== '' 
-     ) {
-       this.fetchImg();
-     }
+    
   };
 
   onSearch = (value) => {
@@ -64,11 +60,6 @@ export class App extends Component {
       request: value.title.trim(),
       page: 1,
     }));
-     if (
-       this.state.request !== '' 
-     ) {
-       this.fetchImg();
-     }
     if (value.title.trim() === '') this.setState({ error: ERROR_MSG });
     
   };
@@ -76,7 +67,13 @@ export class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
    
-   
+    if (
+      this.state.request !== '' &&
+      (prevState.request !== this.state.request ||
+        prevState.page !== this.state.page)
+    ) {
+      this.fetchImg();
+    }
      window.scrollTo(0, document.body.scrollHeight);
 }
 
