@@ -30,7 +30,7 @@ export class App extends Component {
          pictures: search.data,
          
        }));
-    
+     if (search.data.total ===0) { this.setState({ error: ERROR_MSG });}
      } catch (error) {
        this.setState({ error: 'Error, try reloading the page' });
      } finally {
@@ -56,12 +56,13 @@ export class App extends Component {
 
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.request !== '' &&
-      (prevState.request !== this.state.request ||
-        prevState.page !== this.state.page)
-    )
-      this.fetchImg();
+   
+      if (
+        this.state.request !== '' &&
+        (prevState.request !== this.state.request ||
+          prevState.page !== this.state.page)
+      )
+        this.fetchImg();
     
 }
 
