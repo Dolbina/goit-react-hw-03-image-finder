@@ -30,7 +30,7 @@ export class App extends Component {
          pictures: search.data,
          
        }));
-       console.log(search.data);
+    
      } catch (error) {
        this.setState({ error: 'Error, try reloading the page' });
      } finally {
@@ -42,7 +42,7 @@ export class App extends Component {
     this.setState(state => ({
       page: (state.page += 1),
     }));
-    console.log(this.state.page);
+    
   };
 
   onSearch = (value) => {
@@ -51,18 +51,11 @@ export class App extends Component {
       page: 1,
     }));
     if (value.title.trim() === '') this.setState({ error: ERROR_MSG });
-    console.log(value.title);
+    
   };
-
-//   componentDidMount() {
-//     if (this.state.request === '') this.setState({ error: ERROR_MSG });
-//     console.log(this.state.error);
-// }
 
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state.request, '   ', this.state.page);
-    
     if (
       this.state.request !== '' &&
       (prevState.request !== this.state.request ||
@@ -93,7 +86,6 @@ export class App extends Component {
               onClick={() => this.onLoadMore(this.state.page)}
               page={this.state.page}
             >
-              {' '}
               Load more
             </ButtonLoadMore>
           )}
