@@ -26,11 +26,21 @@ export class App extends Component {
      try {
        this.setState({ isLoading: true, error: null });
        const search = await API.fetchImg(this.state.request, this.state.page);
-       this.setState(state => ({
-         pictures: search.data,
-         
-       }));
-     if (search.data.total ===0) { this.setState({ error: ERROR_MSG });}
+
+       //const hits = [...this.state.pictures.hits, ...search.data.hits];
+       if (this.state.page === 1) {
+         this.setState(state => ({
+           pictures: search.data,
+
+         }));
+       } else {
+         search.data.hits = [...this.state.pictures.hits, ...search.data.hits];
+         this.setState(state => ({
+           pictures: search.data,
+         }));
+       }
+       if (search.data.total === 0) { this.setState({ error: ERROR_MSG }); }
+       
      } catch (error) {
        this.setState({ error: 'Error, try reloading the page' });
      } finally {
@@ -63,7 +73,7 @@ export class App extends Component {
           prevState.page !== this.state.page)
       )
         this.fetchImg();
-    
+     window.scrollTo(0, document.body.scrollHeight);
 }
 
   render() {
@@ -72,13 +82,14 @@ export class App extends Component {
         <SearchbarWrap>
           <Searchbar onSubmit={this.onSearch} />
         </SearchbarWrap>
-        {this.state.isLoading && <Loader />}
+        
         {!this.state.isLoading && this.state.error && (
           <ErrorMessage>{this.state.error}</ErrorMessage>
         )}
-        {!this.state.isLoading && !this.state.error && this.state.pictures && (
+        { !this.state.error && this.state.pictures && (
           <ImageGallery pictures={this.state.pictures} />
         )}
+        {this.state.isLoading && <Loader />}
         {!this.state.isLoading &&
           !this.state.error &&
           this.state.pictures &&
